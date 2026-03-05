@@ -65,6 +65,22 @@ body {
     padding-bottom: 5px;
 }
 
+.lang-select {
+    width: 100%;
+    padding: 0.5rem;
+    background: #34495e;
+    color: white;
+    border: 1px solid #2c3e50;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.lang-select:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+
 .toggle-control {
     display: flex;
     align-items: center;
@@ -225,61 +241,6 @@ th {
     background-color: #f8f9fa;
     color: var(--dark);
     font-weight: 600;
-}
-
-/* Venn Diagram */
-.venn-visualizer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 300px;
-    position: relative;
-    margin-top: 1rem;
-}
-
-.circle {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    position: absolute;
-    opacity: 0.6;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-weight: bold;
-    color: white;
-    font-size: 1.2rem;
-    transition: all 0.5s ease;
-}
-
-.circle-a {
-    background: var(--primary);
-    left: 20%;
-}
-
-.circle-b {
-    background: var(--secondary);
-    right: 20%;
-}
-
-.intersection-label {
-    position: absolute;
-    font-weight: bold;
-    color: #fff;
-    z-index: 10;
-    text-shadow: 0 0 5px rgba(0,0,0,0.5);
-}
-
-.venn-controls {
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-    margin-bottom: 1rem;
-}
-
-.venn-controls input {
-    width: 80px;
-    text-align: center;
 }
 
 /* Animations */
