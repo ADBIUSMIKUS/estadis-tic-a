@@ -73,7 +73,7 @@ body {
 }
 
 .lang-select {
-    width: 47%;
+    width: 100%;
     padding: 6px;
     background: #34495e;
     color: white;
@@ -157,8 +157,8 @@ body {
 .input-group label { display: block; font-weight: 600; margin-bottom: 5px; font-size: 0.9rem; }
 
 input { 
-    width: 10%; 
-    padding: 10px; 
+    width: 1%; 
+    padding: 1px; 
     border: 1px solid #ddd; 
     border-radius: 8px; 
     box-sizing: border-box; 
