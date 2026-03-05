@@ -1,567 +1,404 @@
-// --- Configuración y Estado Global ---
-const translations = {
+/**
+ * Suite Estadística Universitaria - Lógica Principal
+ * Todos los comentarios están en español para mayor claridad.
+ */
+
+// --- CONFIGURACIÓN Y ESTADO ---
+const traducciones = {
     es: {
         loading: "Cargando herramientas estadísticas...",
         language_title: "Idioma",
-        viz_title: "Visualización",
+        viz_title: "Gráficos",
         nav_bar: "Barras",
         nav_line: "Líneas",
-        nav_scatter: "Dispersión",
-        nav_pie: "Circular (Pie)",
+        nav_pareto: "Pareto",
+        nav_ojiva: "Ojiva",
+        nav_pie: "Circular",
         nav_pictogram: "Pictograma",
         tools_title: "Herramientas",
-        nav_freq: "Tabla de Frecuencias",
+        nav_stats: "Tendencia Central",
+        nav_freq: "Frecuencias",
         nav_prob: "Probabilidad",
+        nav_tree: "Árbol",
+        nav_sets: "Conjuntos",
+        nav_random: "Aleatorios",
         custom_title: "Personalización",
-        color_primary: "Color Principal:",
-        color_secondary: "Color Secundario:",
         clear_history: "Borrar Historial",
         main_title: "Dashboard Estadístico",
-        export_all: "Exportar Todo",
-        export_img: "Imagen (PNG)",
+        export_all: "Exportar",
         input_card_title: "Entrada de Datos",
-        history_empty: "Sin historial reciente",
-        labels_input_label: "Etiquetas (eje X / Categorías)",
-        labels_placeholder: "Ej: Ene, Feb, Mar, Abr",
-        data_input_label: "Valores Numéricos (eje Y / Frecuencias)",
-        data_placeholder: "Ej: 10, 20, 15, 30",
+        labels_input_label: "Etiquetas (Eje X)",
+        data_input_label: "Valores (Eje Y)",
         process_btn: "Procesar Datos",
-        chart_bar: "Gráfico de Barras",
-        chart_line: "Gráfico de Líneas",
-        chart_scatter: "Diagrama de Dispersión",
-        chart_pie: "Gráfico Circular",
-        chart_pictogram: "Pictograma",
-        tool_freq: "Tabla de Frecuencias",
-        table_class: "Clase (x)",
-        table_abs: "Frec. Absoluta (f)",
-        table_acc: "Frec. Acumulada (F)",
-        table_rel: "Frec. Relativa (fr)",
-        table_rel_acc: "Frec. Rel. Acum. (Fr)",
-        tool_prob: "Calculadora de Probabilidad",
-        prob_n: "n (Total)",
-        prob_r: "r (Selección)",
-        prob_fact: "Factorial (n!)",
-        prob_perm: "Permutación P(n,r)",
-        prob_comb: "Combinación C(n,r)",
-        prob_calc_btn: "Calcular",
-        alert_no_data: "Por favor ingresa algunos datos.",
+        alert_no_data: "Por favor ingresa datos válidos.",
         confirm_clear: "¿Borrar todo el historial?",
+        history_empty: "Historial vacío",
         history_label: "Datos:"
     },
-    ru: {
-        loading: "Загрузка статистических инструментов...",
-        language_title: "Язык",
-        viz_title: "Визуализация",
-        nav_bar: "Столбчатая",
-        nav_line: "Линейная",
-        nav_scatter: "Рассеяние",
-        nav_pie: "Круговая",
-        nav_pictogram: "Пиктограмма",
-        tools_title: "Инструменты",
-        nav_freq: "Таблица частот",
-        nav_prob: "Вероятность",
-        custom_title: "Персонализация",
-        color_primary: "Основной цвет:",
-        color_secondary: "Вторичный цвет:",
-        clear_history: "Очистить историю",
-        main_title: "Статистическая панель",
-        export_all: "Экспорт всего",
-        export_img: "Изображение (PNG)",
-        input_card_title: "Ввод данных",
-        history_empty: "Нет недавней истории",
-        labels_input_label: "Метки (ось X / Категории)",
-        labels_placeholder: "Напр: Янв, Фев, Мар",
-        data_input_label: "Числовые значения (ось Y)",
-        data_placeholder: "Напр: 10, 20, 15",
-        process_btn: "Обработать данные",
-        chart_bar: "Столбчатая диаграмма",
-        chart_line: "Линейный график",
-        chart_scatter: "Диаграмма рассеяния",
-        chart_pie: "Круговая диаграмма",
-        chart_pictogram: "Пиктограмма",
-        tool_freq: "Таблица частот",
-        table_class: "Класс (x)",
-        table_abs: "Абс. частота (f)",
-        table_acc: "Накоп. частота (F)",
-        table_rel: "Отн. частота (fr)",
-        table_rel_acc: "Накоп. отн. част. (Fr)",
-        tool_prob: "Калькулятор вероятностей",
-        prob_n: "n (Всего)",
-        prob_r: "r (Выбор)",
-        prob_fact: "Факториал (n!)",
-        prob_perm: "Перестановка P(n,r)",
-        prob_comb: "Сочетание C(n,r)",
-        prob_calc_btn: "Вычислить",
-        alert_no_data: "Пожалуйста, введите данные.",
-        confirm_clear: "Очистить всю историю?",
-        history_label: "Данные:"
-    },
-    zh: {
-        loading: "正在加载统计工具...",
-        language_title: "语言",
-        viz_title: "可视化",
-        nav_bar: "柱状图",
-        nav_line: "折线图",
-        nav_scatter: "散点图",
-        nav_pie: "饼图",
-        nav_pictogram: "象形图",
-        tools_title: "工具",
-        nav_freq: "频数表",
-        nav_prob: "概率",
-        custom_title: "个性化",
-        color_primary: "主色调:",
-        color_secondary: "辅助色:",
-        clear_history: "清除历史记录",
-        main_title: "统计仪表板",
-        export_all: "导出全部",
-        export_img: "图片 (PNG)",
-        input_card_title: "数据输入",
-        history_empty: "无最近记录",
-        labels_input_label: "标签 (X轴 / 类别)",
-        labels_placeholder: "例如: 一月, 二月, 三月",
-        data_input_label: "数值 (Y轴 / 频数)",
-        data_placeholder: "例如: 10, 20, 15",
-        process_btn: "处理数据",
-        chart_bar: "柱状图",
-        chart_line: "折线图",
-        chart_scatter: "散点图",
-        chart_pie: "饼图",
-        chart_pictogram: "象形图",
-        tool_freq: "频数表",
-        table_class: "组别 (x)",
-        table_abs: "频数 (f)",
-        table_acc: "累积频数 (F)",
-        table_rel: "相对频数 (fr)",
-        table_rel_acc: "累积相对频数 (Fr)",
-        tool_prob: "概率计算器",
-        prob_n: "n (总数)",
-        prob_r: "r (选择)",
-        prob_fact: "阶乘 (n!)",
-        prob_perm: "排列 P(n,r)",
-        prob_comb: "组合 C(n,r)",
-        prob_calc_btn: "计算",
-        alert_no_data: "请输入一些数据。",
-        confirm_clear: "确定清除所有历史记录吗？",
-        history_label: "数据:"
-    },
-    fr: {
-        loading: "Chargement des outils statistiques...",
-        language_title: "Langue",
-        viz_title: "Visualisation",
-        nav_bar: "Barres",
-        nav_line: "Lignes",
-        nav_scatter: "Dispersion",
-        nav_pie: "Circulaire (Pie)",
-        nav_pictogram: "Pictogramme",
-        tools_title: "Outils",
-        nav_freq: "Tableau de Fréquences",
-        nav_prob: "Probabilité",
-        custom_title: "Personnalisation",
-        color_primary: "Couleur Principale :",
-        color_secondary: "Couleur Secondaire :",
-        clear_history: "Effacer l'Historique",
-        main_title: "Tableau de Bord Statistique",
-        export_all: "Tout Exporter",
-        export_img: "Image (PNG)",
-        input_card_title: "Saisie de Données",
-        history_empty: "Aucun historique récent",
-        labels_input_label: "Étiquettes (axe X / Catégories)",
-        labels_placeholder: "Ex: Jan, Fév, Mar",
-        data_input_label: "Valeurs Numériques (axe Y)",
-        data_placeholder: "Ex: 10, 20, 15",
-        process_btn: "Traiter les Données",
-        chart_bar: "Graphique à Barres",
-        chart_line: "Graphique Linéaire",
-        chart_scatter: "Nuage de Points",
-        chart_pie: "Graphique Circulaire",
-        chart_pictogram: "Pictogramme",
-        tool_freq: "Tableau de Fréquences",
-        table_class: "Classe (x)",
-        table_abs: "Fréq. Absolue (f)",
-        table_acc: "Fréq. Cumulée (F)",
-        table_rel: "Fréq. Relative (fr)",
-        table_rel_acc: "Fréq. Rel. Cum. (Fr)",
-        tool_prob: "Calculateur de Probabilité",
-        prob_n: "n (Total)",
-        prob_r: "r (Sélection)",
-        prob_fact: "Factorielle (n!)",
-        prob_perm: "Permutation P(n,r)",
-        prob_comb: "Combinaison C(n,r)",
-        prob_calc_btn: "Calculer",
-        alert_no_data: "Veuillez saisir des données.",
-        confirm_clear: "Effacer tout l'historique ?",
-        history_label: "Données :"
-    }
+    ru: { /* Ruso - Simplificado */ },
+    zh: { /* Chino - Simplificado */ },
+    fr: { /* Francés - Simplificado */ }
 };
 
-const state = {
-    charts: {},
-    primaryColor: '#3498db',
-    secondaryColor: '#e74c3c',
-    history: JSON.parse(localStorage.getItem('statsHistory')) || [],
-    lang: localStorage.getItem('statsLang') || 'es'
+const estado = {
+    graficos: {},
+    colorPrimario: '#3498db',
+    colorSecundario: '#e74c3c',
+    historial: JSON.parse(localStorage.getItem('historialEstadistico')) || [],
+    idioma: localStorage.getItem('idiomaApp') || 'es'
 };
 
-// Referencias DOM
+// --- REFERENCIAS AL DOM ---
 const dom = {
-    dataInput: document.getElementById('data-input'),
-    labelsInput: document.getElementById('labels-input'),
-    toggles: {
+    entradaDatos: document.getElementById('data-input'),
+    entradaEtiquetas: document.getElementById('labels-input'),
+    selectores: {
         bar: document.getElementById('toggle-bar'),
         line: document.getElementById('toggle-line'),
-        scatter: document.getElementById('toggle-scatter'),
+        pareto: document.getElementById('toggle-pareto'),
+        ojiva: document.getElementById('toggle-ojiva'),
         pie: document.getElementById('toggle-pie'),
         pictogram: document.getElementById('toggle-pictogram'),
+        stats: document.getElementById('toggle-stats'),
         freq: document.getElementById('toggle-freq'),
-        prob: document.getElementById('toggle-prob')
+        prob: document.getElementById('toggle-prob'),
+        tree: document.getElementById('toggle-tree'),
+        sets: document.getElementById('toggle-sets'),
+        random: document.getElementById('toggle-random')
     },
-    cards: {
+    tarjetas: {
         bar: document.getElementById('card-bar'),
         line: document.getElementById('card-line'),
-        scatter: document.getElementById('card-scatter'),
+        pareto: document.getElementById('card-pareto'),
+        ojiva: document.getElementById('card-ojiva'),
         pie: document.getElementById('card-pie'),
         pictogram: document.getElementById('card-pictogram'),
+        stats: document.getElementById('card-stats'),
         freq: document.getElementById('card-freq'),
-        prob: document.getElementById('card-prob')
+        prob: document.getElementById('card-prob'),
+        tree: document.getElementById('card-tree'),
+        sets: document.getElementById('card-sets'),
+        random: document.getElementById('card-random')
     },
-    historyList: document.getElementById('history-list'),
-    loadingOverlay: document.getElementById('loading-overlay'),
-    langSelector: document.getElementById('language-selector')
+    overlayCarga: document.getElementById('loading-overlay'),
+    listaHistorial: document.getElementById('history-list'),
+    selectorIdioma: document.getElementById('language-selector')
 };
 
-// --- Inicialización ---
+// --- INICIALIZACIÓN ---
 window.addEventListener('load', () => {
-    // Aplicar idioma guardado
-    dom.langSelector.value = state.lang;
-    updateLanguage();
-
-    // Simular carga
+    aplicarIdioma();
+    dom.selectorIdioma.value = estado.idioma;
+    
+    // Ocultar pantalla de carga
     setTimeout(() => {
-        dom.loadingOverlay.style.opacity = '0';
-        setTimeout(() => dom.loadingOverlay.remove(), 500);
-    }, 1000);
+        dom.overlayCarga.style.opacity = '0';
+        setTimeout(() => dom.overlayCarga.remove(), 500);
+    }, 800);
 
-    renderHistory();
-    setupEventListeners();
-    updateVisibility();
+    configurarEventos();
+    actualizarVisibilidad();
 });
 
-function setupEventListeners() {
-    document.getElementById('process-btn').addEventListener('click', processData);
-    document.getElementById('clear-history-btn').addEventListener('click', clearHistory);
-    document.getElementById('history-btn').addEventListener('click', () => {
-        dom.historyList.classList.toggle('hidden');
-    });
-
-    // Color Pickers
+function configurarEventos() {
+    // Botón procesar
+    document.getElementById('process-btn').addEventListener('click', procesarInformacion);
+    
+    // Cambios de color
     document.getElementById('primary-color-picker').addEventListener('input', (e) => {
-        state.primaryColor = e.target.value;
-        updateAllCharts();
+        estado.colorPrimario = e.target.value;
+        if(dom.entradaDatos.value) procesarInformacion();
     });
-    document.getElementById('secondary-color-picker').addEventListener('input', (e) => {
-        state.secondaryColor = e.target.value;
-        updateAllCharts();
-    });
-
-    // Language Selector
-    dom.langSelector.addEventListener('change', (e) => {
-        state.lang = e.target.value;
-        localStorage.setItem('statsLang', state.lang);
-        updateLanguage();
-        if (dom.dataInput.value) processData(); // Refrescar tablas con nuevos encabezados
+    
+    // Cambios de visibilidad
+    Object.keys(dom.selectores).forEach(key => {
+        dom.selectores[key].addEventListener('change', actualizarVisibilidad);
     });
 
-    // Toggles
-    Object.keys(dom.toggles).forEach(key => {
-        dom.toggles[key].addEventListener('change', updateVisibility);
+    // Cambio de idioma
+    dom.selectorIdioma.addEventListener('change', (e) => {
+        estado.idioma = e.target.value;
+        localStorage.setItem('idiomaApp', estado.idioma);
+        aplicarIdioma();
+        if(dom.entradaDatos.value) procesarInformacion();
     });
+
+    // Código Konami
+    detectarKonami();
 }
 
-function updateLanguage() {
-    const langData = translations[state.lang];
-    
-    // Traducir elementos con data-i18n
+function aplicarIdioma() {
+    const d = traducciones[estado.idioma] || traducciones['es'];
     document.querySelectorAll('[data-i18n]').forEach(el => {
         const key = el.getAttribute('data-i18n');
-        if (langData[key]) {
-            el.innerText = langData[key];
-        }
-    });
-
-    // Traducir placeholders
-    document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
-        const key = el.getAttribute('data-i18n-placeholder');
-        if (langData[key]) {
-            el.placeholder = langData[key];
-        }
+        if(d[key]) el.innerText = d[key];
     });
 }
 
-function updateVisibility() {
-    Object.keys(dom.toggles).forEach(key => {
-        if (dom.toggles[key].checked) {
-            dom.cards[key].classList.remove('hidden');
-        } else {
-            dom.cards[key].classList.add('hidden');
-        }
+function actualizarVisibilidad() {
+    Object.keys(dom.selectores).forEach(key => {
+        if(dom.selectores[key].checked) dom.tarjetas[key].classList.remove('hidden');
+        else dom.tarjetas[key].classList.add('hidden');
     });
 }
 
-// --- Procesamiento de Datos ---
-function processData() {
-    const rawData = dom.dataInput.value;
-    const rawLabels = dom.labelsInput.value;
-    
-    if (!rawData) return alert(translations[state.lang].alert_no_data);
+// --- LÓGICA DE PROCESAMIENTO ---
+function procesarInformacion() {
+    const rawData = dom.entradaDatos.value;
+    const rawLabels = dom.entradaEtiquetas.value;
 
-    const data = rawData.split(',').map(n => parseFloat(n.trim())).filter(n => !isNaN(n));
-    const labels = rawLabels ? rawLabels.split(',').map(s => s.trim()) : data.map((_, i) => `${translations[state.lang].history_label.split(':')[0]} ${i+1}`);
+    if(!rawData) return alert(traducciones[estado.idioma].alert_no_data || "Ingrese datos");
 
-    addToHistory(rawData, rawLabels);
+    // Limpiar y convertir datos
+    const datos = rawData.split(',').map(n => parseFloat(n.trim())).filter(n => !isNaN(n));
+    const etiquetas = rawLabels ? rawLabels.split(',').map(s => s.trim()) : datos.map((_, i) => `D${i+1}`);
+
+    // Cálculos estadísticos
+    calcularTendenciaCentral(datos);
+    generarTablaFrecuencias(datos);
     
-    // Actualizar todas las visualizaciones activas
-    if(dom.toggles.bar.checked) updateChart('bar', 'canvas-bar', data, labels);
-    if(dom.toggles.line.checked) updateChart('line', 'canvas-line', data, labels);
-    if(dom.toggles.scatter.checked) updateChart('scatter', 'canvas-scatter', data, labels);
-    if(dom.toggles.pie.checked) updateChart('pie', 'canvas-pie', data, labels);
-    if(dom.toggles.pictogram.checked) updatePictogram(data, labels);
-    if(dom.toggles.freq.checked) generateFrequencyTable(data);
-    
-    // Herramientas independientes
-    if(dom.toggles.prob.checked) calcProbability();
+    // Renderizar Gráficos
+    if(dom.selectores.bar.checked) renderizarChart('bar', 'canvas-bar', datos, etiquetas);
+    if(dom.selectores.line.checked) renderizarChart('line', 'canvas-line', datos, etiquetas);
+    if(dom.selectores.pie.checked) renderizarChart('pie', 'canvas-pie', datos, etiquetas);
+    if(dom.selectores.pareto.checked) renderizarPareto(datos, etiquetas);
+    if(dom.selectores.ojiva.checked) renderizarOjiva(datos, etiquetas);
+    if(dom.selectores.pictogram.checked) renderizarPictograma(datos, etiquetas);
+
+    // Herramientas extras
+    if(dom.selectores.tree.checked) dibujarArbol();
+    if(dom.selectores.sets.checked) calcularConjuntos();
+    if(dom.selectores.prob.checked) calcularProbabilidades();
+
+    guardarHistorial(rawData, rawLabels);
 }
 
-// --- Gráficos (Chart.js) ---
-function updateChart(type, canvasId, data, labels) {
-    const ctx = document.getElementById(canvasId).getContext('2d');
-    
-    if (state.charts[canvasId]) {
-        state.charts[canvasId].destroy();
-    }
+// --- CÁLCULOS ESTADÍSTICOS ---
+function calcularTendenciaCentral(datos) {
+    const n = datos.length;
+    const suma = datos.reduce((a, b) => a + b, 0);
+    const media = suma / n;
 
-    let config = {
-        type: type,
+    // Mediana
+    const ordenados = [...datos].sort((a,b) => a-b);
+    const mitad = Math.floor(n / 2);
+    const mediana = n % 2 !== 0 ? ordenados[mitad] : (ordenados[mitad - 1] + ordenados[mitad]) / 2;
+
+    // Moda
+    const frec = {};
+    datos.forEach(d => frec[d] = (frec[d] || 0) + 1);
+    const maxFrec = Math.max(...Object.values(frec));
+    const modas = Object.keys(frec).filter(d => frec[d] === maxFrec);
+
+    document.getElementById('res-mean').innerText = media.toFixed(2);
+    document.getElementById('res-median').innerText = mediana.toFixed(2);
+    document.getElementById('res-mode').innerText = modas.length > 3 ? "Multimodal" : modas.join(', ');
+    document.getElementById('res-max').innerText = Math.max(...datos);
+    document.getElementById('res-min').innerText = Math.min(...datos);
+}
+
+// --- GRÁFICOS ESPECIALIZADOS ---
+function renderizarPareto(datos, etiquetas) {
+    const ctx = document.getElementById('canvas-pareto').getContext('2d');
+    
+    // Unir datos con etiquetas para ordenar
+    let items = datos.map((v, i) => ({ val: v, label: etiquetas[i] }));
+    items.sort((a, b) => b.val - a.val);
+
+    const labelsSort = items.map(i => i.label);
+    const dataSort = items.map(i => i.val);
+    const total = dataSort.reduce((a, b) => a + b, 0);
+    
+    let sumaAcum = 0;
+    const porcentajes = dataSort.map(v => {
+        sumaAcum += v;
+        return (sumaAcum / total) * 100;
+    });
+
+    destruirGrafico('canvas-pareto');
+    estado.graficos['canvas-pareto'] = new Chart(ctx, {
+        type: 'bar',
         data: {
-            labels: labels,
-            datasets: [{
-                label: state.lang === 'es' ? 'Valores' : (state.lang === 'ru' ? 'Значения' : (state.lang === 'zh' ? '数值' : 'Valeurs')),
-                data: type === 'scatter' ? data.map((v, i) => ({x: i, y: v})) : data,
-                backgroundColor: type === 'pie' ? generateColors(data.length) : state.primaryColor,
-                borderColor: state.secondaryColor,
-                borderWidth: 1,
-                fill: type === 'line'
-            }]
+            labels: labelsSort,
+            datasets: [
+                { label: 'Frecuencia', data: dataSort, backgroundColor: estado.colorPrimario, yAxisID: 'y' },
+                { label: '% Acumulado', data: porcentajes, type: 'line', borderColor: estado.colorSecundario, yAxisID: 'y1', tension: 0.3 }
+            ]
         },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            animation: {
-                duration: 1000,
-                easing: 'easeOutQuart'
+        options: { 
+            scales: { 
+                y: { beginAtZero: true, position: 'left' },
+                y1: { max: 100, position: 'right', grid: { display: false } }
             }
         }
-    };
-
-    state.charts[canvasId] = new Chart(ctx, config);
+    });
 }
 
-function updateAllCharts() {
-    if (dom.dataInput.value) processData(); 
+function renderizarOjiva(datos, etiquetas) {
+    const ctx = document.getElementById('canvas-ojiva').getContext('2d');
+    const ordenados = [...datos].sort((a,b) => a-b);
+    let suma = 0;
+    const acumulado = ordenados.map(v => {
+        suma += v;
+        return suma;
+    });
+
+    destruirGrafico('canvas-ojiva');
+    estado.graficos['canvas-ojiva'] = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ordenados.map(v => v.toString()),
+            datasets: [{
+                label: 'Frecuencia Acumulada (Ojiva)',
+                data: acumulado,
+                borderColor: estado.colorPrimario,
+                backgroundColor: 'rgba(52, 152, 219, 0.2)',
+                fill: true,
+                stepped: true
+            }]
+        }
+    });
 }
 
-function generateColors(count) {
-    const colors = [];
-    for(let i=0; i<count; i++) {
-        colors.push(`hsl(${(i * 360) / count}, 70%, 60%)`);
+// --- CÓDIGO KONAMI ---
+function detectarKonami() {
+    const codigo = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a', 'Enter'];
+    let indice = 0;
+
+    document.addEventListener('keydown', (e) => {
+        if(e.key === codigo[indice]) {
+            indice++;
+            if(indice === codigo.length) {
+                document.getElementById('konami-modal').classList.remove('hidden');
+                indice = 0;
+            }
+        } else {
+            indice = 0;
+        }
+    });
+}
+
+// --- FUNCIONES DE SOPORTE ---
+function renderizarChart(tipo, canvasId, datos, etiquetas) {
+    const ctx = document.getElementById(canvasId).getContext('2d');
+    destruirGrafico(canvasId);
+    
+    estado.graficos[canvasId] = new Chart(ctx, {
+        type: tipo,
+        data: {
+            labels: etiquetas,
+            datasets: [{
+                label: 'Datos',
+                data: datos,
+                backgroundColor: tipo === 'pie' ? generarColores(datos.length) : estado.colorPrimario,
+                borderColor: estado.colorSecundario,
+                borderWidth: 1
+            }]
+        }
+    });
+}
+
+function destruirGrafico(id) {
+    if(estado.graficos[id]) estado.graficos[id].destroy();
+}
+
+function generarColores(n) {
+    return Array.from({length: n}, (_, i) => `hsl(${(i * 360) / n}, 70%, 60%)`);
+}
+
+// --- HERRAMIENTAS ADICIONALES ---
+function calcularConjuntos() {
+    const a = new Set(document.getElementById('set-a').value.split(',').map(v => v.trim()));
+    const b = new Set(document.getElementById('set-b').value.split(',').map(v => v.trim()));
+
+    const union = new Set([...a, ...b]);
+    const inter = new Set([...a].filter(x => b.has(x)));
+    const diff = new Set([...a].filter(x => !b.has(x)));
+
+    document.getElementById('res-union').innerText = `{ ${[...union].join(', ')} }`;
+    document.getElementById('res-inter').innerText = `{ ${[...inter].join(', ')} }`;
+    document.getElementById('res-diff').innerText = `{ ${[...diff].join(', ')} }`;
+}
+
+function calcularProbabilidades() {
+    const pa = parseFloat(document.getElementById('prob-pa').value) || 0;
+    const pb = parseFloat(document.getElementById('prob-pb').value) || 0;
+    const n = parseInt(document.getElementById('prob-n').value) || 0;
+    const r = parseInt(document.getElementById('prob-r').value) || 0;
+
+    // Regla Multiplicativa (Independiente)
+    document.getElementById('res-multi').innerText = (pa * pb).toFixed(4);
+
+    const fact = (num) => (num <= 1 ? 1 : num * fact(num - 1));
+    
+    if(n >= r) {
+        document.getElementById('res-fact').innerText = fact(n).toLocaleString();
+        document.getElementById('res-perm').innerText = (fact(n) / fact(n - r)).toLocaleString();
+        document.getElementById('res-comb').innerText = (fact(n) / (fact(r) * fact(n - r))).toLocaleString();
     }
-    return colors;
 }
 
-// --- Pictograma ---
-function updatePictogram(data, labels) {
+function dibujarArbol() {
+    const container = document.getElementById('tree-visualizer');
+    container.innerHTML = "Inicio\n ├── A (P: 0.5)\n │   ├── Éxito\n │   └── Fracaso\n └── B (P: 0.5)\n     ├── Éxito\n     └── Fracaso";
+}
+
+function generateRandom() {
+    const n = parseInt(document.getElementById('rand-n').value) || 10;
+    const min = parseInt(document.getElementById('rand-min').value) || 0;
+    const max = parseInt(document.getElementById('rand-max').value) || 100;
+    
+    const vals = Array.from({length: n}, () => Math.floor(Math.random() * (max - min + 1)) + min);
+    dom.entradaDatos.value = vals.join(', ');
+    procesarInformacion();
+}
+
+function renderizarPictograma(datos, etiquetas) {
     const container = document.getElementById('pictogram-container');
     container.innerHTML = '';
-    
-    data.forEach((val, i) => {
+    datos.forEach((v, i) => {
         const row = document.createElement('div');
-        row.style.margin = '10px 0';
-        row.style.fontSize = '1.5rem';
-        row.style.color = state.primaryColor;
-        
-        const label = document.createElement('strong');
-        label.innerText = (labels[i] || `Dato ${i+1}`) + ': ';
-        label.style.marginRight = '10px';
-        label.style.color = '#333';
-        label.style.fontSize = '1rem';
-        
-        row.appendChild(label);
-        
-        const count = Math.min(Math.floor(val), 50); 
-        for(let j=0; j<count; j++) {
-            const icon = document.createElement('i');
-            icon.className = 'fa-solid fa-user'; 
-            icon.style.marginRight = '2px';
-            row.appendChild(icon);
-        }
-        
-        if (val > 50) {
-            const more = document.createElement('span');
-            more.innerText = ' ...';
-            row.appendChild(more);
-        }
-
+        row.innerHTML = `<strong>${etiquetas[i]}:</strong> ` + '👤'.repeat(Math.min(Math.floor(v), 50));
         container.appendChild(row);
     });
 }
 
-// --- Tabla de Frecuencias ---
-function generateFrequencyTable(data) {
+function generarTablaFrecuencias(datos) {
     const tbody = document.querySelector('#freq-table tbody');
     tbody.innerHTML = '';
-    
-    const sorted = [...data].sort((a,b) => a - b);
+    const sorted = [...datos].sort((a,b) => a-b);
     const n = sorted.length;
-    const map = {};
-    sorted.forEach(x => map[x] = (map[x] || 0) + 1);
-    
-    let cumulativeFreq = 0;
-    let cumulativeRelFreq = 0;
+    const fAbs = {};
+    sorted.forEach(v => fAbs[v] = (fAbs[v] || 0) + 1);
 
-    Object.keys(map).sort((a,b) => parseFloat(a)-parseFloat(b)).forEach(key => {
-        const freqAbs = map[key];
-        cumulativeFreq += freqAbs;
-        const freqRel = freqAbs / n;
-        cumulativeRelFreq += freqRel;
-
-        const row = `
-            <tr>
-                <td>${key}</td>
-                <td>${freqAbs}</td>
-                <td>${cumulativeFreq}</td>
-                <td>${freqRel.toFixed(4)}</td>
-                <td>${cumulativeRelFreq.toFixed(4)}</td>
-            </tr>
-        `;
+    let acum = 0;
+    Object.keys(fAbs).forEach(x => {
+        const f = fAbs[x];
+        acum += f;
+        const row = `<tr><td>${x}</td><td>${f}</td><td>${acum}</td><td>${(f/n).toFixed(2)}</td><td>${(acum/n).toFixed(2)}</td></tr>`;
         tbody.innerHTML += row;
     });
 }
 
-// --- Probabilidad ---
-function calcProbability() {
-    const n = parseInt(document.getElementById('prob-n').value);
-    const r = parseInt(document.getElementById('prob-r').value);
-
-    function factorial(num) {
-        if (num < 0) return -1;
-        if (num == 0) return 1;
-        return num * factorial(num - 1);
-    }
-
-    const nFact = factorial(n);
-    const pResult = factorial(n) / factorial(n - r);
-    const cResult = factorial(n) / (factorial(r) * factorial(n - r));
-
-    document.getElementById('res-factorial').innerText = nFact.toLocaleString();
-    document.getElementById('res-permutation').innerText = pResult.toLocaleString();
-    document.getElementById('res-combination').innerText = cResult.toLocaleString();
+function guardarHistorial(d, l) {
+    const entry = { date: new Date().toLocaleTimeString(), d, l };
+    estado.historial.unshift(entry);
+    if(estado.historial.length > 5) estado.historial.pop();
+    localStorage.setItem('historialEstadistico', JSON.stringify(estado.historial));
 }
 
-// --- Historial (LocalStorage) ---
-function addToHistory(dataStr, labelsStr) {
-    const entry = {
-        date: new Date().toLocaleString(),
-        data: dataStr,
-        labels: labelsStr
-    };
-    
-    if (state.history.length > 0 && state.history[0].data === dataStr) return;
-
-    state.history.unshift(entry);
-    if (state.history.length > 10) state.history.pop(); 
-    
-    localStorage.setItem('statsHistory', JSON.stringify(state.history));
-    renderHistory();
-}
-
-function renderHistory() {
-    dom.historyList.innerHTML = '';
-    if (state.history.length === 0) {
-        dom.historyList.innerHTML = `<p class="empty-msg" data-i18n="history_empty">${translations[state.lang].history_empty}</p>`;
-        return;
-    }
-
-    state.history.forEach((item, index) => {
-        const div = document.createElement('div');
-        div.className = 'history-item';
-        div.innerHTML = `
-            <strong>${translations[state.lang].history_label}</strong> ${item.data.substring(0, 20)}...
-            <small>${item.date}</small>
-        `;
-        div.onclick = () => {
-            dom.dataInput.value = item.data;
-            dom.labelsInput.value = item.labels;
-            processData();
-            dom.historyList.classList.add('hidden');
-        };
-        dom.historyList.appendChild(div);
-    });
-}
-
-function clearHistory() {
-    if(confirm(translations[state.lang].confirm_clear)) {
-        state.history = [];
-        localStorage.removeItem('statsHistory');
-        renderHistory();
-    }
-}
-
-// --- Exportación ---
+// Exportación global (Simple)
 window.exportAll = async (type) => {
-    const element = document.getElementById('dashboard-grid');
-    
-    if (type === 'png') {
-        const canvas = await html2canvas(element);
-        const link = document.createElement('a');
-        link.download = 'dashboard-estadistico.png';
-        link.href = canvas.toDataURL();
-        link.click();
-    } else if (type === 'pdf') {
-        const canvas = await html2canvas(element);
-        const imgData = canvas.toDataURL('image/png');
-        const pdf = new jspdf.jsPDF({
-            orientation: 'landscape',
-        });
-        const imgProps= pdf.getImageProperties(imgData);
-        const pdfWidth = pdf.internal.pageSize.getWidth();
-        const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
-        
-        pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
-        pdf.save('dashboard-estadistico.pdf');
+    const el = document.getElementById('dashboard-grid');
+    const canvas = await html2canvas(el);
+    if(type === 'png') {
+        const a = document.createElement('a');
+        a.href = canvas.toDataURL();
+        a.download = 'dashboard.png';
+        a.click();
+    } else {
+        const pdf = new jspdf.jsPDF('l', 'mm', 'a4');
+        pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 10, 10, 280, 150);
+        pdf.save('dashboard.pdf');
     }
 };
-
-window.exportTableToExcel = (tableId) => {
-    const table = document.getElementById(tableId);
-    const wb = XLSX.utils.table_to_book(table, {sheet: "Frecuencias"});
-    XLSX.writeFile(wb, 'tabla_frecuencias.xlsx');
-};
-
-window.exportElement = async (elementId, name) => {
-    const element = document.getElementById(elementId);
-    const canvas = await html2canvas(element);
-    const link = document.createElement('a');
-    link.download = `${name}.png`;
-    link.href = canvas.toDataURL();
-    link.click();
-};
-
-document.querySelectorAll('.download-chart-btn').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-        const targetId = btn.getAttribute('data-target');
-        const canvas = document.getElementById(targetId);
-        const link = document.createElement('a');
-        link.download = `grafico-${targetId}.png`;
-        link.href = canvas.toDataURL();
-        link.click();
-    });
-});

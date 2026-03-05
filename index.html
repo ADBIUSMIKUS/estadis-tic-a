@@ -3,29 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Suite Estadística Pro</title>
+    <title>Suite Estadística Universitaria</title>
     <link rel="stylesheet" href="style.css">
-    <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    
-    <!-- Libraries -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 </head>
 <body>
-    <!-- Loading Screen -->
     <div id="loading-overlay">
         <div class="spinner"></div>
-        <p data-i18n="loading">Cargando herramientas estadísticas...</p>
+        <p data-i18n="loading">Cargando herramientas...</p>
     </div>
 
     <div class="app-container">
-        <!-- Sidebar -->
         <aside class="sidebar">
             <div class="logo">
-                <i class="fa-solid fa-chart-line"></i> Estadís<span class="highlight">TIC</span>a
+                <i class="fa-solid fa-chart-pie"></i> Estadís<span class="highlight">TIC</span>a
             </div>
 
             <div class="sidebar-section">
@@ -39,208 +34,181 @@
             </div>
             
             <div class="sidebar-section">
-                <h3><i class="fa-solid fa-layer-group"></i> <span data-i18n="viz_title">Visualización</span></h3>
-                <label class="toggle-control">
-                    <input type="checkbox" id="toggle-bar" checked>
-                    <span data-i18n="nav_bar">Barras</span>
-                </label>
-                <label class="toggle-control">
-                    <input type="checkbox" id="toggle-line">
-                    <span data-i18n="nav_line">Líneas</span>
-                </label>
-                <label class="toggle-control">
-                    <input type="checkbox" id="toggle-scatter">
-                    <span data-i18n="nav_scatter">Dispersión</span>
-                </label>
-                <label class="toggle-control">
-                    <input type="checkbox" id="toggle-pie">
-                    <span data-i18n="nav_pie">Circular (Pie)</span>
-                </label>
-                <label class="toggle-control">
-                    <input type="checkbox" id="toggle-pictogram">
-                    <span data-i18n="nav_pictogram">Pictograma</span>
-                </label>
+                <h3><i class="fa-solid fa-layer-group"></i> <span data-i18n="viz_title">Gráficos</span></h3>
+                <div class="toggle-grid">
+                    <label class="toggle-control"><input type="checkbox" id="toggle-bar" checked> <span data-i18n="nav_bar">Barras</span></label>
+                    <label class="toggle-control"><input type="checkbox" id="toggle-line"> <span data-i18n="nav_line">Líneas</span></label>
+                    <label class="toggle-control"><input type="checkbox" id="toggle-pareto"> <span data-i18n="nav_pareto">Pareto</span></label>
+                    <label class="toggle-control"><input type="checkbox" id="toggle-ojiva"> <span data-i18n="nav_ojiva">Ojiva</span></label>
+                    <label class="toggle-control"><input type="checkbox" id="toggle-pie"> <span data-i18n="nav_pie">Circular</span></label>
+                    <label class="toggle-control"><input type="checkbox" id="toggle-pictogram"> <span data-i18n="nav_pictogram">Pictograma</span></label>
+                </div>
             </div>
 
             <div class="sidebar-section">
                 <h3><i class="fa-solid fa-calculator"></i> <span data-i18n="tools_title">Herramientas</span></h3>
-                <label class="toggle-control">
-                    <input type="checkbox" id="toggle-freq" checked>
-                    <span data-i18n="nav_freq">Tabla de Frecuencias</span>
-                </label>
-                <label class="toggle-control">
-                    <input type="checkbox" id="toggle-prob">
-                    <span data-i18n="nav_prob">Probabilidad</span>
-                </label>
+                <div class="toggle-grid">
+                    <label class="toggle-control"><input type="checkbox" id="toggle-stats" checked> <span data-i18n="nav_stats">Tendencia Central</span></label>
+                    <label class="toggle-control"><input type="checkbox" id="toggle-freq"> <span data-i18n="nav_freq">Frecuencias</span></label>
+                    <label class="toggle-control"><input type="checkbox" id="toggle-prob"> <span data-i18n="nav_prob">Probabilidad</span></label>
+                    <label class="toggle-control"><input type="checkbox" id="toggle-tree"> <span data-i18n="nav_tree">Árbol</span></label>
+                    <label class="toggle-control"><input type="checkbox" id="toggle-sets"> <span data-i18n="nav_sets">Conjuntos</span></label>
+                    <label class="toggle-control"><input type="checkbox" id="toggle-random"> <span data-i18n="nav_random">Aleatorios</span></label>
+                </div>
             </div>
 
             <div class="sidebar-section">
-                <h3><i class="fa-solid fa-palette"></i> <span data-i18n="custom_title">Personalización</span></h3>
+                <h3><i class="fa-solid fa-palette"></i> <span data-i18n="custom_title">Color</span></h3>
                 <div class="color-picker-group">
-                    <label data-i18n="color_primary">Color Principal:</label>
                     <input type="color" id="primary-color-picker" value="#3498db">
-                </div>
-                <div class="color-picker-group">
-                    <label data-i18n="color_secondary">Color Secundario:</label>
                     <input type="color" id="secondary-color-picker" value="#e74c3c">
                 </div>
             </div>
 
             <div class="sidebar-footer">
-                <button id="clear-history-btn" class="danger-btn"><i class="fa-solid fa-trash"></i> <span data-i18n="clear_history">Borrar Historial</span></button>
+                <button id="clear-history-btn" class="danger-btn"><i class="fa-solid fa-trash"></i> <span data-i18n="clear_history">Limpiar</span></button>
             </div>
         </aside>
 
-        <!-- Main Content -->
         <main class="main-content">
             <header class="top-bar">
                 <h1 data-i18n="main_title">Dashboard Estadístico</h1>
-                <div class="actions">
-                    <div class="dropdown">
-                        <button class="action-btn"><i class="fa-solid fa-download"></i> <span data-i18n="export_all">Exportar Todo</span></button>
-                        <div class="dropdown-content">
-                            <a href="#" onclick="exportAll('pdf')"><i class="fa-solid fa-file-pdf"></i> PDF</a>
-                            <a href="#" onclick="exportAll('png')"><i class="fa-solid fa-image"></i> <span data-i18n="export_img">Imagen (PNG)</span></a>
-                        </div>
+                <div class="dropdown">
+                    <button class="action-btn"><i class="fa-solid fa-download"></i> <span data-i18n="export_all">Exportar</span></button>
+                    <div class="dropdown-content">
+                        <a href="#" onclick="exportAll('pdf')">PDF</a>
+                        <a href="#" onclick="exportAll('png')">PNG</a>
                     </div>
                 </div>
             </header>
 
-            <!-- Data Input Section -->
+            <!-- Entrada de Datos -->
             <section class="card input-card animate-slide-down">
                 <div class="card-header">
-                    <h2><i class="fa-solid fa-keyboard"></i> <span data-i18n="input_card_title">Entrada de Datos</span></h2>
+                    <h2><i class="fa-solid fa-keyboard"></i> <span data-i18n="input_card_title">Datos</span></h2>
                     <div class="history-dropdown">
-                        <button id="history-btn" class="icon-btn" title="Historial"><i class="fa-solid fa-clock-rotate-left"></i></button>
-                        <div id="history-list" class="history-content hidden">
-                            <!-- History items will be populated here -->
-                            <p class="empty-msg" data-i18n="history_empty">Sin historial reciente</p>
-                        </div>
+                        <button id="history-btn" class="icon-btn"><i class="fa-solid fa-clock-rotate-left"></i></button>
+                        <div id="history-list" class="history-content hidden"></div>
                     </div>
                 </div>
                 <div class="input-grid">
                     <div class="input-group">
-                        <label data-i18n="labels_input_label">Etiquetas (eje X / Categorías)</label>
-                        <input type="text" id="labels-input" placeholder="Ej: Ene, Feb, Mar, Abr" data-i18n-placeholder="labels_placeholder">
+                        <label data-i18n="labels_input_label">Etiquetas</label>
+                        <input type="text" id="labels-input" placeholder="A, B, C...">
                     </div>
                     <div class="input-group">
-                        <label data-i18n="data_input_label">Valores Numéricos (eje Y / Frecuencias)</label>
-                        <input type="text" id="data-input" placeholder="Ej: 10, 20, 15, 30" data-i18n-placeholder="data_placeholder">
+                        <label data-i18n="data_input_label">Valores</label>
+                        <input type="text" id="data-input" placeholder="10, 20, 30...">
                     </div>
                 </div>
-                <div class="action-row">
-                    <button id="process-btn" class="primary-btn"><i class="fa-solid fa-play"></i> <span data-i18n="process_btn">Procesar Datos</span></button>
-                </div>
+                <button id="process-btn" class="primary-btn"><i class="fa-solid fa-sync"></i> <span data-i18n="process_btn">Procesar</span></button>
             </section>
 
-            <!-- Dashboard Grid -->
             <div id="dashboard-grid" class="dashboard-grid">
+                <!-- Estadísticas de Tendencia Central -->
+                <div class="card tool-card hidden" id="card-stats">
+                    <div class="card-header"><h3 data-i18n="nav_stats">Medidas</h3></div>
+                    <div class="stats-results-grid">
+                        <div class="res-box"><span>Media</span><strong id="res-mean">-</strong></div>
+                        <div class="res-box"><span>Mediana</span><strong id="res-median">-</strong></div>
+                        <div class="res-box"><span>Moda</span><strong id="res-mode">-</strong></div>
+                        <div class="res-box"><span>Máx</span><strong id="res-max">-</strong></div>
+                        <div class="res-box"><span>Mín</span><strong id="res-min">-</strong></div>
+                    </div>
+                </div>
+
+                <!-- Gráficos -->
+                <div class="card chart-card hidden" id="card-bar"><canvas id="canvas-bar"></canvas></div>
+                <div class="card chart-card hidden" id="card-line"><canvas id="canvas-line"></canvas></div>
+                <div class="card chart-card hidden" id="card-pareto"><canvas id="canvas-pareto"></canvas></div>
+                <div class="card chart-card hidden" id="card-ojiva"><canvas id="canvas-ojiva"></canvas></div>
+                <div class="card chart-card hidden" id="card-pie"><canvas id="canvas-pie"></canvas></div>
                 
-                <!-- Chart Cards (Generated Dynamically) -->
-                <div class="card chart-card hidden" id="card-bar">
-                    <div class="card-header">
-                        <h3 data-i18n="chart_bar">Gráfico de Barras</h3>
-                        <button class="icon-btn download-chart-btn" data-target="canvas-bar"><i class="fa-solid fa-camera"></i></button>
-                    </div>
-                    <div class="chart-wrapper">
-                        <canvas id="canvas-bar"></canvas>
-                    </div>
-                </div>
-
-                <div class="card chart-card hidden" id="card-line">
-                    <div class="card-header">
-                        <h3 data-i18n="chart_line">Gráfico de Líneas</h3>
-                        <button class="icon-btn download-chart-btn" data-target="canvas-line"><i class="fa-solid fa-camera"></i></button>
-                    </div>
-                    <div class="chart-wrapper">
-                        <canvas id="canvas-line"></canvas>
-                    </div>
-                </div>
-
-                <div class="card chart-card hidden" id="card-scatter">
-                    <div class="card-header">
-                        <h3 data-i18n="chart_scatter">Diagrama de Dispersión</h3>
-                        <button class="icon-btn download-chart-btn" data-target="canvas-scatter"><i class="fa-solid fa-camera"></i></button>
-                    </div>
-                    <div class="chart-wrapper">
-                        <canvas id="canvas-scatter"></canvas>
-                    </div>
-                </div>
-
-                <div class="card chart-card hidden" id="card-pie">
-                    <div class="card-header">
-                        <h3 data-i18n="chart_pie">Gráfico Circular</h3>
-                        <button class="icon-btn download-chart-btn" data-target="canvas-pie"><i class="fa-solid fa-camera"></i></button>
-                    </div>
-                    <div class="chart-wrapper">
-                        <canvas id="canvas-pie"></canvas>
-                    </div>
-                </div>
-
                 <div class="card chart-card hidden" id="card-pictogram">
-                    <div class="card-header">
-                        <h3 data-i18n="chart_pictogram">Pictograma</h3>
-                        <button class="icon-btn" onclick="exportElement('pictogram-container', 'pictograma')"><i class="fa-solid fa-camera"></i></button>
-                    </div>
-                    <div id="pictogram-container" class="pictogram-wrapper"></div>
+                    <h3 data-i18n="nav_pictogram">Pictograma</h3>
+                    <div id="pictogram-container"></div>
                 </div>
 
-                <!-- Frequency Table -->
+                <!-- Tabla de Frecuencias -->
                 <div class="card tool-card hidden" id="card-freq">
-                    <div class="card-header">
-                        <h3 data-i18n="tool_freq">Tabla de Frecuencias</h3>
-                        <button class="icon-btn" onclick="exportTableToExcel('freq-table')"><i class="fa-solid fa-file-excel"></i></button>
-                    </div>
                     <div class="table-responsive">
                         <table id="freq-table">
                             <thead>
-                                <tr>
-                                    <th data-i18n="table_class">Clase (x)</th>
-                                    <th data-i18n="table_abs">Frec. Absoluta (f)</th>
-                                    <th data-i18n="table_acc">Frec. Acumulada (F)</th>
-                                    <th data-i18n="table_rel">Frec. Relativa (fr)</th>
-                                    <th data-i18n="table_rel_acc">Frec. Rel. Acum. (Fr)</th>
-                                </tr>
+                                <tr><th>x</th><th>f</th><th>F</th><th>fr</th><th>Fr</th></tr>
                             </thead>
-                            <tbody><!-- Populated via JS --></tbody>
+                            <tbody></tbody>
                         </table>
                     </div>
                 </div>
 
-                <!-- Probability Calculator -->
+                <!-- Probabilidad y Regla Multiplicativa -->
                 <div class="card tool-card hidden" id="card-prob">
-                    <div class="card-header">
-                        <h3 data-i18n="tool_prob">Calculadora de Probabilidad</h3>
-                    </div>
-                    <div class="prob-grid">
-                        <div class="prob-item">
-                            <label data-i18n="prob_n">n (Total)</label>
-                            <input type="number" id="prob-n" value="5">
+                    <h3 data-i18n="nav_prob">Probabilidad</h3>
+                    <div class="prob-ui">
+                        <div class="input-row">
+                            <input type="number" id="prob-pa" step="0.1" placeholder="P(A)">
+                            <input type="number" id="prob-pb" step="0.1" placeholder="P(B)">
                         </div>
-                        <div class="prob-item">
-                            <label data-i18n="prob_r">r (Selección)</label>
-                            <input type="number" id="prob-r" value="2">
+                        <div class="result-box">
+                            <span>P(A ∩ B) Independiente: </span><strong id="res-multi">-</strong>
                         </div>
-                        <div class="prob-results">
-                            <div class="result-box">
-                                <span data-i18n="prob_fact">Factorial (n!)</span>
-                                <strong id="res-factorial">-</strong>
-                            </div>
-                            <div class="result-box">
-                                <span data-i18n="prob_perm">Permutación P(n,r)</span>
-                                <strong id="res-permutation">-</strong>
-                            </div>
-                            <div class="result-box">
-                                <span data-i18n="prob_comb">Combinación C(n,r)</span>
-                                <strong id="res-combination">-</strong>
-                            </div>
+                        <hr>
+                        <div class="input-row">
+                            <input type="number" id="prob-n" placeholder="n">
+                            <input type="number" id="prob-r" placeholder="r">
                         </div>
-                        <button onclick="calcProbability()" class="secondary-btn" style="width:100%; margin-top:10px;" data-i18n="prob_calc_btn">Calcular</button>
+                        <div class="stats-results-grid">
+                            <div class="res-box"><span>n!</span><strong id="res-fact">-</strong></div>
+                            <div class="res-box"><span>P(n,r)</span><strong id="res-perm">-</strong></div>
+                            <div class="res-box"><span>C(n,r)</span><strong id="res-comb">-</strong></div>
+                        </div>
                     </div>
                 </div>
 
+                <!-- Operaciones de Conjuntos -->
+                <div class="card tool-card hidden" id="card-sets">
+                    <h3 data-i18n="nav_sets">Conjuntos</h3>
+                    <div class="sets-ui">
+                        <input type="text" id="set-a" placeholder="Conjunto A (1,2,3)">
+                        <input type="text" id="set-b" placeholder="Conjunto B (3,4,5)">
+                        <div class="sets-results">
+                            <div>A ∪ B: <span id="res-union">-</span></div>
+                            <div>A ∩ B: <span id="res-inter">-</span></div>
+                            <div>A - B: <span id="res-diff">-</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Diagrama de Árbol (Visual Simple) -->
+                <div class="card tool-card hidden" id="card-tree">
+                    <h3 data-i18n="nav_tree">Diagrama de Árbol</h3>
+                    <div id="tree-visualizer" class="tree-container"></div>
+                </div>
+
+                <!-- Generador Aleatorio -->
+                <div class="card tool-card hidden" id="card-random">
+                    <h3 data-i18n="nav_random">Generador Aleatorio</h3>
+                    <div class="random-ui">
+                        <input type="number" id="rand-n" placeholder="Cantidad (n)">
+                        <input type="number" id="rand-min" placeholder="Mín">
+                        <input type="number" id="rand-max" placeholder="Máx">
+                        <button onclick="generateRandom()" class="primary-btn">Generar</button>
+                    </div>
+                </div>
             </div>
         </main>
+    </div>
+
+    <!-- Modal Konami -->
+    <div id="konami-modal" class="modal hidden">
+        <div class="modal-content">
+            <h2>¡Código Konami Activado! 🎮</h2>
+            <p>¿Esto merece 10?</p>
+            <div class="modal-actions">
+                <button onclick="alert('Puntaje: 10/10')" class="primary-btn">Si (= 10)</button>
+                <button onclick="document.body.innerHTML='<h1>Página Eliminada</h1>'" class="danger-btn">No (= Eliminar)</button>
+            </div>
+        </div>
     </div>
 
     <script src="script.js"></script>
