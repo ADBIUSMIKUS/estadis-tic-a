@@ -160,7 +160,7 @@ body {
 .input-group label { display: block; font-weight: 600; margin-bottom: 5px; font-size: 0.9rem; }
 
 input { 
-    width: 1%; 
+    width: 10%; 
     padding: 1px; 
     border: 1px solid #ddd; 
     border-radius: 8px; 
