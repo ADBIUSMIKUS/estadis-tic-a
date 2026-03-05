@@ -61,15 +61,18 @@ body {
     display: grid;
     grid-template-columns: 1fr;
     gap: 5px;
+    justify-items: start; 
 }
 
 .toggle-control {
     display: flex;
     align-items: center;
+    justify-content: flex-start;
     gap: 8px;
     cursor: pointer;
     font-size: 0.9rem;
     padding: 2px 0;
+    width: 100%; 
 }
 
 .lang-select {
