@@ -28,7 +28,7 @@ body {
     width: 240px;
     background: var(--dark);
     color: var(--light);
-    padding: 1rem; /* Reducido de 1.5rem */
+    padding: 1rem;
     position: sticky;
     top: 0;
     height: 100vh;
@@ -39,13 +39,13 @@ body {
 .logo {
     font-size: 1.4rem;
     font-weight: bold;
-    margin-bottom: 1.5rem; /* Reducido */
-    text-align: left; /* Alineado a la izquierda */
+    margin-bottom: 1.5rem;
+    text-align: left;
     padding-left: 5px;
 }
 
 .sidebar-section {
-    margin-bottom: 1.2rem; /* Reducido */
+    margin-bottom: 1.2rem;
 }
 
 .sidebar-section h3 {
@@ -60,7 +60,7 @@ body {
 .toggle-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 5px; /* Más compacto */
+    gap: 5px;
 }
 
 .toggle-control {
@@ -69,7 +69,7 @@ body {
     gap: 8px;
     cursor: pointer;
     font-size: 0.9rem;
-    padding: 2px 0; /* Espaciado mínimo */
+    padding: 2px 0;
 }
 
 .lang-select {
@@ -90,7 +90,7 @@ body {
 }
 
 .color-picker-group input[type="color"] {
-    width: 50px; /* Ajustado ligeramente */
+    width: 50px;
     height: 50px;
     padding: 0;
     border: 1px solid #455a64;
@@ -102,14 +102,14 @@ body {
 /* Contenido Principal */
 .main-content {
     flex: 1;
-    padding: 1rem 1.5rem; /* Reducido (1rem arriba/abajo, 1.5rem lados) */
+    padding: 1rem 1.5rem;
 }
 
 .top-bar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 1rem; /* Reducido */
+    margin-bottom: 1rem;
 }
 
 .top-bar h1 {
@@ -120,14 +120,14 @@ body {
 .dashboard-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 1rem; /* Reducido de 1.5rem */
+    gap: 1rem;
 }
 
 /* Tarjetas */
 .card {
     background: var(--card-bg);
-    border-radius: 8px; /* Radio un poco más pequeño para verse más técnico */
-    padding: 1rem; /* Reducido de 1.5rem */
+    border-radius: 8px;
+    padding: 1rem;
     box-shadow: var(--shadow);
     transition: transform 0.2s;
 }
@@ -156,15 +156,47 @@ body {
 .input-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
 .input-group label { display: block; font-weight: 600; margin-bottom: 5px; font-size: 0.9rem; }
 
-input { width: 10%; padding: 2px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; }
+input { 
+    width: 100%; 
+    padding: 10px; 
+    border: 1px solid #ddd; 
+    border-radius: 8px; 
+    box-sizing: border-box; 
+    font-size: 0.9rem;
+}
 
-input { width: 10%; padding: 2px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; }
-
-
-.primary-btn { background: var(--primary); color: white; border: none; padding: 10px; border-radius: 8px; cursor: pointer; font-weight: bold; width: 10%; transition: background 0.3s; }
+.primary-btn { 
+    background: var(--primary); 
+    color: white; 
+    border: none; 
+    padding: 12px 30px; 
+    border-radius: 8px; 
+    cursor: pointer; 
+    font-weight: bold; 
+    width: 100%; 
+    transition: background 0.3s; 
+}
 .primary-btn:hover { background: #2980b9; }
 
-.danger-btn { background: var(--secondary); color: white; border: none; padding: 10px; border-radius: 6px; cursor: pointer; width: 10%; }
+.danger-btn { 
+    background: var(--secondary); 
+    color: white; 
+    border: none; 
+    padding: 10px 25px; 
+    border-radius: 6px; 
+    cursor: pointer; 
+    width: 100%; 
+}
+
+.action-btn {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 10px 30px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+}
 
 /* Tabla */
 table { width: 100%; border-collapse: collapse; margin-top: 1rem; font-size: 0.9rem; }
