@@ -58,10 +58,16 @@
             </div>
 
             <div class="sidebar-section">
-                <h3><i class="fa-solid fa-palette"></i> <span data-i18n="custom_title">Color</span></h3>
+                <h3><i class="fa-solid fa-palette"></i> <span data-i18n="custom_title">Colores de Ejes</span></h3>
                 <div class="color-picker-group">
-                    <input type="color" id="primary-color-picker" value="#3498db">
-                    <input type="color" id="secondary-color-picker" value="#e74c3c">
+                    <div class="color-item" style="display:flex; flex-direction:column; align-items:center;">
+                        <span style="font-size:0.7rem; margin-bottom:5px;">Eje X</span>
+                        <input type="color" id="primary-color-picker" value="#3498db" title="Color Eje X">
+                    </div>
+                    <div class="color-item" style="display:flex; flex-direction:column; align-items:center;">
+                        <span style="font-size:0.7rem; margin-bottom:5px;">Eje Y</span>
+                        <input type="color" id="secondary-color-picker" value="#e74c3c" title="Color Eje Y">
+                    </div>
                 </div>
             </div>
 

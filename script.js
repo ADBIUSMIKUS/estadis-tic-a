@@ -42,8 +42,8 @@ const traducciones = {
 
 const estado = {
     graficos: {},
-    colorPrimario: '#3498db',
-    colorSecundario: '#e74c3c',
+    colorEjeX: '#3498db',
+    colorEjeY: '#e74c3c',
     historial: JSON.parse(localStorage.getItem('historialEstadistico')) || [],
     idioma: localStorage.getItem('idiomaApp') || 'es'
 };
@@ -82,7 +82,9 @@ const dom = {
     },
     overlayCarga: document.getElementById('loading-overlay'),
     listaHistorial: document.getElementById('history-list'),
-    selectorIdioma: document.getElementById('language-selector')
+    selectorIdioma: document.getElementById('language-selector'),
+    pickerX: document.getElementById('primary-color-picker'),
+    pickerY: document.getElementById('secondary-color-picker')
 };
 
 // --- INICIALIZACIÓN ---
@@ -90,6 +92,10 @@ window.addEventListener('load', () => {
     aplicarIdioma();
     dom.selectorIdioma.value = estado.idioma;
     
+    // Configurar valores iniciales de pickers
+    dom.pickerX.value = estado.colorEjeX;
+    dom.pickerY.value = estado.colorEjeY;
+
     // Ocultar pantalla de carga
     setTimeout(() => {
         dom.overlayCarga.style.opacity = '0';
@@ -105,14 +111,14 @@ function configurarEventos() {
     document.getElementById('process-btn').addEventListener('click', procesarInformacion);
     
     // Cambios de color
-    document.getElementById('primary-color-picker').addEventListener('input', (e) => {
-        estado.colorPrimario = e.target.value;
+    dom.pickerX.addEventListener('input', (e) => {
+        estado.colorEjeX = e.target.value;
         if(dom.entradaDatos.value) procesarInformacion();
     });
-    
-    // Cambios de visibilidad
-    Object.keys(dom.selectores).forEach(key => {
-        dom.selectores[key].addEventListener('change', actualizarVisibilidad);
+
+    dom.pickerY.addEventListener('input', (e) => {
+        estado.colorEjeY = e.target.value;
+        if(dom.entradaDatos.value) procesarInformacion();
     });
 
     // Cambio de idioma
@@ -201,7 +207,6 @@ function calcularTendenciaCentral(datos) {
 function renderizarPareto(datos, etiquetas) {
     const ctx = document.getElementById('canvas-pareto').getContext('2d');
     
-    // Unir datos con etiquetas para ordenar
     let items = datos.map((v, i) => ({ val: v, label: etiquetas[i] }));
     items.sort((a, b) => b.val - a.val);
 
@@ -221,14 +226,28 @@ function renderizarPareto(datos, etiquetas) {
         data: {
             labels: labelsSort,
             datasets: [
-                { label: 'Frecuencia', data: dataSort, backgroundColor: estado.colorPrimario, yAxisID: 'y' },
-                { label: '% Acumulado', data: porcentajes, type: 'line', borderColor: estado.colorSecundario, yAxisID: 'y1', tension: 0.3 }
+                { label: 'Frecuencia', data: dataSort, backgroundColor: '#3498db', yAxisID: 'y' },
+                { label: '% Acumulado', data: porcentajes, type: 'line', borderColor: '#e74c3c', yAxisID: 'y1', tension: 0.3 }
             ]
         },
         options: { 
             scales: { 
-                y: { beginAtZero: true, position: 'left' },
-                y1: { max: 100, position: 'right', grid: { display: false } }
+                y: { 
+                    beginAtZero: true, 
+                    position: 'left',
+                    grid: { color: estado.colorEjeY },
+                    ticks: { color: estado.colorEjeY }
+                },
+                y1: { 
+                    max: 100, 
+                    position: 'right', 
+                    grid: { display: false },
+                    ticks: { color: estado.colorEjeY }
+                },
+                x: {
+                    grid: { color: estado.colorEjeX },
+                    ticks: { color: estado.colorEjeX }
+                }
             }
         }
     });
@@ -251,11 +270,23 @@ function renderizarOjiva(datos, etiquetas) {
             datasets: [{
                 label: 'Frecuencia Acumulada (Ojiva)',
                 data: acumulado,
-                borderColor: estado.colorPrimario,
+                borderColor: '#3498db',
                 backgroundColor: 'rgba(52, 152, 219, 0.2)',
                 fill: true,
                 stepped: true
             }]
+        },
+        options: {
+            scales: {
+                x: {
+                    grid: { color: estado.colorEjeX },
+                    ticks: { color: estado.colorEjeX }
+                },
+                y: {
+                    grid: { color: estado.colorEjeY },
+                    ticks: { color: estado.colorEjeY }
+                }
+            }
         }
     });
 }
@@ -290,10 +321,22 @@ function renderizarChart(tipo, canvasId, datos, etiquetas) {
             datasets: [{
                 label: 'Datos',
                 data: datos,
-                backgroundColor: tipo === 'pie' ? generarColores(datos.length) : estado.colorPrimario,
-                borderColor: estado.colorSecundario,
+                backgroundColor: tipo === 'pie' ? generarColores(datos.length) : '#3498db',
+                borderColor: '#e74c3c',
                 borderWidth: 1
             }]
+        },
+        options: {
+            scales: tipo !== 'pie' ? {
+                x: {
+                    grid: { color: estado.colorEjeX },
+                    ticks: { color: estado.colorEjeX }
+                },
+                y: {
+                    grid: { color: estado.colorEjeY },
+                    ticks: { color: estado.colorEjeY }
+                }
+            } : {}
         }
     });
 }
